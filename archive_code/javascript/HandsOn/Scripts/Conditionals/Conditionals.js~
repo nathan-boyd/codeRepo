@@ -1,0 +1,27 @@
+/*
+
+ Robert Boyd  
+ CSCI N341
+ Hands On Exercise # 5 Conditionals
+ Project Description: Prompt user to determine if they arrived to class on time
+                      Perform convert upper on answer
+                      If yes alert to extra credit
+		      else alert failed
+
+ @param	name 	    description 
+ 
+ strAnswer          time late to class
+ intMinutesLate     minutes late to class cast to int
+ 
+*/
+
+strAnswer = prompt("Did you get to class on time?");
+
+strUpperAnswer = strAnswer.toUpperCase();
+
+if (strUpperAnswer == "YES" || strUpperAnswer == "Y"){
+    alert("You get Extra Credit!");
+} else {
+    alert("You Failed the Class!");
+} //end else 
+
