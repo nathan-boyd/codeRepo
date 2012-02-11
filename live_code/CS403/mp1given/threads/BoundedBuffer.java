@@ -6,8 +6,9 @@ public class BoundedBuffer
 {
    //MP1 create any variables you need
     
+   
     int BUFFER_SIZE;
-    private Object[] buffer;
+    private char[] buffer;
     
     int count, in, out = 0;
     
@@ -20,67 +21,56 @@ public class BoundedBuffer
    //buffer of size "size"
    public BoundedBuffer(int size)
    {
+       
+
+       
+       
        this.BUFFER_SIZE = size;
-       this.buffer = new Object[BUFFER_SIZE];   
+       this.buffer = new char[BUFFER_SIZE];   
        this.mutex = new Semaphore("mutex", 1);
        this.fillCount = new Semaphore("fillCount", 0);
        this.emptyCount = new Semaphore("emptyCount", size);
        
    }
    
-    public void putItemIntoBuffer(Object item) {
+    public void putItemIntoBuffer(char c) {
+	
+	
+	       
 	emptyCount.P();
         mutex.P();
+        
         //add an item to the buffer
-        buffer[in] = item;
+        buffer[in] = c;
         in = (in + 1) % BUFFER_SIZE;
         mutex.V();
         fillCount.V();
     }
     
-    public Object removeItemFromBuffer() {
-	fillCount.P();
-        mutex.P();
+    public char removeItemFromBuffer() {
+	this.fillCount.P();
+	this.mutex.P();
+        
         // remove an item from the buffer
-        Object item = buffer[out];
-        out = (out + 1) % BUFFER_SIZE;
-        mutex.V();
-        emptyCount.V();
+        char item = this.buffer[this.out];
+        this.out = (this.out + 1) % this.BUFFER_SIZE;
+        this.mutex.V();
+        this.emptyCount.V();
+        
+        System.out.println("Item " + item);
+        
         return item;
     }
-    
-    public Object produceItem(){
-	
-	Object item = new Object();
-	return item;
-    }
-    
-    public void consumeItem(Object item){
-	
-	
-    }
+        
 
    //produce()
-   //produces a character c.  If the buffer is full, wait for an empty
-   //slot
+   //produces a character c.  If the buffer is full, wait for an empty slot
    public void produce(char c)
    {
      //MP1
 
-/*
-	P() -- waits until value > 0, then decrement
-	V() -- increment, waking up a thread waiting in P() if necessary
-               
-        while (true) 
-        {
-            //item = produceItem();
-            down(emptyCount);
-            down(mutex);
-            putItemIntoBuffer(item);
-            up(mutex);
-            up(fillCount);
-        }
-        
+    /*
+            
         while (TRUE) {                    // loop forever
             make_new(widget);             // create a new widget to put in the buffer
             down(&empty);                 // decrement the empty semaphore
@@ -89,14 +79,14 @@ public class BoundedBuffer
             up(&mutex);                   // leave critical section
             up(&full);                    // increment the full semaphore
         }
-*/
+    */
+
        
        while (true) 
        {
-//           Object item = produceItem();
            emptyCount.P();
            mutex.P();
-           putItemIntoBuffer(c);
+           this.putItemIntoBuffer(c);
            mutex.V();
            fillCount.V();
        }
@@ -104,9 +94,7 @@ public class BoundedBuffer
    }
 
    //consume()
-   //consumes a character.  If the buffer is empty, wait for a producer.
-   //use method SynchTest.addToOutputString(c) upon consuming a character. 
-   //This is used to test your implementation.
+   //consumes a character.  If the buffer is empty, wait for a producer. use method SynchTest.addToOutputString(c) upon consuming a character. This is used to test your implementation.
    public void consume()
    {
      //MP1
@@ -114,14 +102,6 @@ public class BoundedBuffer
      //SynchTest.addToOutputString('c');
        
     /*
-        while (true) {
-            down(fillCount);
-            down(mutex);
-            item = removeItemFromBuffer();
-            up(mutex);
-            up(emptyCount);
-            consumeItem(item);
-        }
         
         while (TRUE) {                    // loop forever
             down(&full);                  // decrement the full semaphore
@@ -133,17 +113,20 @@ public class BoundedBuffer
         }
         
     */
+        System.out.println("consumer");     
                
-        while (true) 
-        {
-            fillCount.P();
-            mutex.P();
-            Object c = removeItemFromBuffer();
-            mutex.V();
-            emptyCount.V();
-//            consumeItem(item);
-            SynchTest.addToOutputString('c');
-        }
+//        while (true) 
+//        {
+//            this.fillCount.P();
+            this.mutex.P();
+            char c = this.removeItemFromBuffer();
+            this.mutex.V();
+            this.emptyCount.V();
+            
+            System.out.println("This is c " + c);
+            
+            SynchTest.addToOutputString(c);
+//        }
 
    }
 
