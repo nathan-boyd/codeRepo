@@ -142,7 +142,7 @@ public class BoundedBuffer
             mutex.V();
             emptyCount.V();
 //            consumeItem(item);
-            SynchTest.addToOutputString((char) c);
+            SynchTest.addToOutputString('c');
         }
 
    }
