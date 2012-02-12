@@ -5,129 +5,137 @@
 public class BoundedBuffer
 {
    //MP1 create any variables you need
-    
-   
-    int BUFFER_SIZE;
-    private char[] buffer;
-    
-    int count, in, out = 0;
-    
-    Semaphore mutex;
-    Semaphore fillCount;
-    Semaphore emptyCount;
+    	
+    private int BUFFER_SIZE;
+    private int in, out = 0;
+    private Object[] buffer;
+    private Semaphore mutex, full, empty;
 
-   //BoundedBuffer
-   //constructor:  initialize any variables that are needed for a bounded 
-   //buffer of size "size"
    public BoundedBuffer(int size)
    {
+       BUFFER_SIZE 	= size;
+       buffer 		= new Object[BUFFER_SIZE];   
        
-
-       
-       
-       this.BUFFER_SIZE = size;
-       this.buffer = new char[BUFFER_SIZE];   
-       this.mutex = new Semaphore("mutex", 1);
-       this.fillCount = new Semaphore("fillCount", 0);
-       this.emptyCount = new Semaphore("emptyCount", size);
+       mutex 		= new Semaphore("mutex", 1);
+       full 		= new Semaphore("full", 0);
+       empty 		= new Semaphore("empty", size);
        
    }
-   
-    public void putItemIntoBuffer(char c) {
-	
-	
-	       
-	emptyCount.P();
-        mutex.P();
-        
-        //add an item to the buffer
-        buffer[in] = c;
-        in = (in + 1) % BUFFER_SIZE;
-        mutex.V();
-        fillCount.V();
-    }
-    
-    public char removeItemFromBuffer() {
-	this.fillCount.P();
-	this.mutex.P();
-        
-        // remove an item from the buffer
-        char item = this.buffer[this.out];
-        this.out = (this.out + 1) % this.BUFFER_SIZE;
-        this.mutex.V();
-        this.emptyCount.V();
-        
-        System.out.println("Item " + item);
-        
-        return item;
-    }
-        
 
-   //produce()
+   //add an item to the buffer
+   public void insert_item(Object item) {
+
+        buffer[in] = item;
+        in = (in + 1) % BUFFER_SIZE;    
+   }
+
+   //remove an item from the buffer 
+   public Object remove_item() {
+
+       Object item = buffer[out];
+       out = (out + 1) % BUFFER_SIZE;
+
+       return item;
+   }
+        
    //produces a character c.  If the buffer is full, wait for an empty slot
-   public void produce(char c)
-   {
-     //MP1
+   public void produce(char c) {
 
-    /*
-            
-        while (TRUE) {                    // loop forever
-            make_new(widget);             // create a new widget to put in the buffer
-            down(&empty);                 // decrement the empty semaphore
-            down(&mutex);                 // enter critical section
-            put_item(widget);             // put widget in buffer
-            up(&mutex);                   // leave critical section
-            up(&full);                    // increment the full semaphore
-        }
-    */
-
-       
-       while (true) 
-       {
-           emptyCount.P();
-           mutex.P();
-           this.putItemIntoBuffer(c);
-           mutex.V();
-           fillCount.V();
-       }
+        do {
+            empty.P(); 				// wait if buffer is full
+            mutex.P(); 				// mutual exclusion to protect buffer
+            insert_item(c); 			// insert item into buffer
+            mutex.V(); 				// end M.E.
+            full.V(); 				// increment full
+        } while (true);
      
    }
 
-   //consume()
    //consumes a character.  If the buffer is empty, wait for a producer. use method SynchTest.addToOutputString(c) upon consuming a character. This is used to test your implementation.
    public void consume()
    {
-     //MP1
-     //make sure you change the following line accordingly
-     //SynchTest.addToOutputString('c');
-       
-    /*
-        
-        while (TRUE) {                    // loop forever
-            down(&full);                  // decrement the full semaphore
-            down(&mutex);                 // enter critical section
-            remove_item(widget);          // take a widget from the buffer
-            up(&mutex);                   // leave critical section
-            up(&empty);                   // increment the empty semaphore
-            consume_item(widget);         // consume the item
-        }
-        
-    */
-        System.out.println("consumer");     
-               
-//        while (true) 
-//        {
-//            this.fillCount.P();
-            this.mutex.P();
-            char c = this.removeItemFromBuffer();
-            this.mutex.V();
-            this.emptyCount.V();
+        do {
+            full.P(); 					// wait if buffer is empty
+            mutex.P(); 					// start M.E.
+            Object item = remove_item();          
+            mutex.V(); 					// end M.E.
+            empty.V(); 					// increment empty.
+   
+            try {
+        	SynchTest.addToOutputString((Character) item);
+            }catch (Exception e) {}
+   
+        } while (true);
             
-            System.out.println("This is c " + c);
-            
-            SynchTest.addToOutputString(c);
-//        }
-
    }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   /*
+   int BUFFER_SIZE;
+   Semaphore mutex;
+   Semaphore empty;
+   Semaphore full;
+   int in, out, count;
+   Object[] buffer;
 
-}
+	
+   public BoundedBuffer (int size) {
+       // buffer is initially empty
+       count = 0;
+       in = 0;
+       out = 0;
+       buffer = new Object[BUFFER_SIZE];
+       mutex = new Semaphore("", 1);
+       empty = new Semaphore("", BUFFER_SIZE);
+       full = new Semaphore("", 0);
+   }
+   	
+   public void produce(Object item) {
+       empty.P();
+       mutex.P();
+       // add an item to the buffer
+       buffer[in] = item;
+       in = (in + 1) % BUFFER_SIZE;
+       mutex.V();
+       full.V();
+   }
+   	
+   public void consume() {
+       full.P();
+       mutex.P();
+       // remove an item from the buffer
+       Object item = buffer[out];
+       out = (out + 1) % BUFFER_SIZE;
+       mutex.V();
+       empty.V();
+       try {
+           SynchTest.addToOutputString((Character) item);
+       }catch(Exception e) {}
+   }
+	
+*/
+   
+
+}//end class

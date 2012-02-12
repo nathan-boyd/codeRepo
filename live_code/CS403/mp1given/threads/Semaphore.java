@@ -68,16 +68,16 @@ class Semaphore {
   //----------------------------------------------------------------------
 
   public void P() {
-    int oldLevel = Interrupt.setLevel(Interrupt.IntOff);// disable interrupts
+    int oldLevel = Interrupt.setLevel(Interrupt.IntOff);		// disable interrupts
     
-    while (value == 0) { 			// semaphore not available
-	queue.append(NachosThread.thisThread());  // so go to sleep
+    while (value == 0) { 						// semaphore not available
+	queue.append(NachosThread.thisThread());  			// so go to sleep
 	NachosThread.thisThread().sleep();
     } 
-    value--; 					// semaphore available, 
-						// consume its value
+    value--; 								// semaphore available, 
+									// consume its value
     
-    Interrupt.setLevel(oldLevel);	// re-enable interrupts
+    Interrupt.setLevel(oldLevel);					// re-enable interrupts
   }
 
   //----------------------------------------------------------------------
