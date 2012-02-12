@@ -6,10 +6,10 @@ public class BoundedBuffer
 {
    //MP1 create any variables you need
           	
-    private int BUFFER_SIZE;
-    private int in, out;
-    private Object[] buffer;
-    private Semaphore mutex, full, empty;
+    private static int BUFFER_SIZE;
+    private static int in, out;
+    private static Object[] buffer;
+    private static Semaphore mutex, full, empty;
 
    public BoundedBuffer(int size)
    {
@@ -30,24 +30,43 @@ public class BoundedBuffer
 
        buffer[in] = item;
        if (in == BUFFER_SIZE) in = 0;
+       
+       
+       
+       for (int i = 0; i < buffer.length; i++) {
+	   System.out.println("Buffer in " + buffer[i]);   
+       }
+       
       
 //       buffer[in] = item;
 //       in = (in + 1) % BUFFER_SIZE;
-
        
    }
 
    //remove an item from the buffer 
    public Object remove_item() {
        
-//       Object item = buffer[out++];
-//       if (out == BUFFER_SIZE) out = 0;
+       Object item = buffer[out++];
+       if (out == BUFFER_SIZE) out = 0;
        
-       Object item = buffer[out];
-       out = (out + 1) % BUFFER_SIZE;
-
+       for (int i = 0; i < buffer.length; i++) {
+	   System.out.println("Buffer out " + buffer[i]);   
+       }
+       
+//       Object item = buffer[out];
+//       out = (out + 1) % BUFFER_SIZE;
 
        return item;
+   }
+   
+   //consume an item by passing it to the output stream
+   public void consume_item(Object item) {
+       
+       try {
+   	SynchTest.addToOutputString((Character) item);
+   	
+       }catch (Exception e) {}
+       
    }
         
    //produces a character c.  If the buffer is full, wait for an empty slot
@@ -74,11 +93,7 @@ public class BoundedBuffer
             Object item = remove_item();     		// remove item from buffer     
             mutex.V(); 					// end M.E.
             empty.V(); 					// increment empty.
-   
-            try {
-        	SynchTest.addToOutputString((Character) item);
-            }catch (Exception e) {}
-   
+            consume_item(item);				// send the item to output stream
         } while (true);
             
    }
