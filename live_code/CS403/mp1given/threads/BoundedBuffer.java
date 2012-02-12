@@ -30,25 +30,33 @@ public class BoundedBuffer
 
        buffer[in] = item;
        if (in == BUFFER_SIZE) in = 0;
+      
+//       buffer[in] = item;
+//       in = (in + 1) % BUFFER_SIZE;
+
        
    }
 
    //remove an item from the buffer 
    public Object remove_item() {
        
-       Object item = buffer[out++];
-       if (out == BUFFER_SIZE) out = 0;
+//       Object item = buffer[out++];
+//       if (out == BUFFER_SIZE) out = 0;
+       
+       Object item = buffer[out];
+       out = (out + 1) % BUFFER_SIZE;
+
 
        return item;
    }
         
    //produces a character c.  If the buffer is full, wait for an empty slot
-   public void produce(char c) {
+   public void produce(char item) {
 
         do {
             empty.P(); 				// wait if buffer is full
             mutex.P(); 				// mutual exclusion to protect buffer
-            insert_item(c); 			// insert item into buffer
+            insert_item(item); 			// insert item into buffer
             mutex.V(); 				// end M.E.
             full.V(); 				// increment full
         } while (true);
