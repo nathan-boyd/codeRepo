@@ -123,6 +123,7 @@ public class SynchTest
 
    public static void addToOutputString(char c)
    {
+      
      l.acquire();
      out[soFar++/2] = c;
      l.release();
@@ -135,8 +136,7 @@ public class SynchTest
    public static void boundedBufferTest()
    {
       NachosThread t;
-//      String message = new String("4I2fh 8y3otul 9c3alnb 3r1efajdc st3h2i3st,a 1tghwesnf rylopui oh3avvces splansosyeyda etshzee 3b5oiusnad4esds gbgugfnfsesri ntleasstd.w 7 oCootnvgarlaptquwlearttiyosnesw!a! ");
-      String message = new String("123456789");
+      String message = new String("4I2fh 8y3otul 9c3alnb 3r1efajdc st3h2i3st,a 1tghwesnf rylopui oh3avvces splansosyeyda etshzee 3b5oiusnad4esds gbgugfnfsesri ntleasstd.w 7 oCootnvgarlaptquwlearttiyosnesw!a! ");
       String name;
       int producers, consumers;
       Producer p;
