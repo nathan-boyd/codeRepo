@@ -135,8 +135,8 @@ public class SynchTest
    public static void boundedBufferTest()
    {
       NachosThread t;
-      String message = new String("4I2fh 8y3otul 9c3alnb 3r1efajdc st3h2i3st,a 1tghwesnf rylopui oh3avvces splansosyeyda etshzee 3b5oiusnad4esds gbgugfnfsesri ntleasstd.w 7 oCootnvgarlaptquwlearttiyosnesw!a! ");
-//      String message = new String("wtffoobar");
+//      String message = new String("4I2fh 8y3otul 9c3alnb 3r1efajdc st3h2i3st,a 1tghwesnf rylopui oh3avvces splansosyeyda etshzee 3b5oiusnad4esds gbgugfnfsesri ntleasstd.w 7 oCootnvgarlaptquwlearttiyosnesw!a! ");
+      String message = new String("123456789");
       String name;
       int producers, consumers;
       Producer p;

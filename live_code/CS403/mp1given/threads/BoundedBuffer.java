@@ -5,15 +5,18 @@
 public class BoundedBuffer
 {
    //MP1 create any variables you need
-    	
+          	
     private int BUFFER_SIZE;
-    private int in, out = 0;
+    private int in, out;
     private Object[] buffer;
     private Semaphore mutex, full, empty;
 
    public BoundedBuffer(int size)
    {
        BUFFER_SIZE 	= size;
+       in 		= 0;
+       out		= 0;
+       
        buffer 		= new Object[BUFFER_SIZE];   
        
        mutex 		= new Semaphore("mutex", 1);
@@ -25,15 +28,16 @@ public class BoundedBuffer
    //add an item to the buffer
    public void insert_item(Object item) {
 
-        buffer[in] = item;
-        in = (in + 1) % BUFFER_SIZE;    
+       buffer[in] = item;
+       if (in == BUFFER_SIZE) in = 0;
+       
    }
 
    //remove an item from the buffer 
    public Object remove_item() {
-
-       Object item = buffer[out];
-       out = (out + 1) % BUFFER_SIZE;
+       
+       Object item = buffer[out++];
+       if (out == BUFFER_SIZE) out = 0;
 
        return item;
    }
@@ -51,13 +55,15 @@ public class BoundedBuffer
      
    }
 
-   //consumes a character.  If the buffer is empty, wait for a producer. use method SynchTest.addToOutputString(c) upon consuming a character. This is used to test your implementation.
+   //consumes a character.  If the buffer is empty, wait for a producer. use method
+   //SynchTest.addToOutputString(c) upon consuming a character. This is used to test 
+   //your implementation.
    public void consume()
    {
         do {
             full.P(); 					// wait if buffer is empty
             mutex.P(); 					// start M.E.
-            Object item = remove_item();          
+            Object item = remove_item();     		// remove item from buffer     
             mutex.V(); 					// end M.E.
             empty.V(); 					// increment empty.
    
@@ -68,10 +74,6 @@ public class BoundedBuffer
         } while (true);
             
    }
-   
-   
-   
-   
    
    
    
