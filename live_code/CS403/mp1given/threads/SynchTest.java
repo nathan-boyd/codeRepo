@@ -214,7 +214,7 @@ public class SynchTest
       boundedBufferTest(); 
 
       //tests reader writer
-//      readerWriterTest();
+      readerWriterTest();
 
    }
    

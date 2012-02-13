@@ -6,11 +6,21 @@ public class Database
    //MP1 create any variables that you need for implementation of the methods
    //of this class
 
+    private int readerCount; 	
+    Semaphore mutex;
+    Semaphore db;
+    
+
    //Database
    //Initializes Database variables
    public Database()
    {
      //MP1
+       
+       readerCount 	= 0;
+       mutex 		= new Semaphore("mutex", 1);
+       db 		= new Semaphore("db", 1);
+       
    }
 
    //napping()
@@ -29,8 +39,20 @@ public class Database
    //new reader.
    public int startRead()
    {
-      //MP1
-      return 0;
+       //MP1
+       
+       mutex.P();
+       ++readerCount;
+       
+       // if I am the first reader tell all others that the database is being read
+       if (readerCount == 1) {
+	   db.V();
+       }
+       
+       mutex.V();
+
+       return readerCount;       
+       
    }
 
    //endRead()
@@ -40,7 +62,19 @@ public class Database
    public int endRead()
    {
       //MP1
-      return 0;
+       
+       mutex.V();
+       --readerCount;
+       
+       // if I am the last reader tell all others that the database is no longer being read
+       if (readerCount == 0) {
+	   db.P();   
+       }
+       
+       mutex.P();
+       
+       return readerCount;
+       
    }
 
    //startWrite()
@@ -50,6 +84,7 @@ public class Database
    public void startWrite()
    {
       //MP1
+       db.V();
 
    }
    
@@ -59,5 +94,7 @@ public class Database
    public void endWrite()
    {
       //MP1
+       db.P();
+       
    }
 }
