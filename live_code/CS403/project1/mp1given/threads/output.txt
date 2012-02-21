@@ -1,0 +1,7 @@
+Forking thread: main
+	interrupts: off -> off
+Putting thread on ready list: main
+	interrupts: off -> off
+Scheduling first Nachos thread
+Switching to thread: main
+Bounded Buffer Result:
