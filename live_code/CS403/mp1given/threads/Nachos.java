@@ -67,8 +67,8 @@ class Nachos implements Runnable {
   public static final boolean FILESYS_NEEDED = false;
   public static final boolean NETWORK = false;
   public static final boolean THREADS = true;
-//  public static boolean SYNCH_TEST = false;
-  public static boolean SYNCH_TEST = true;
+  public static boolean SYNCH_TEST = false;
+
 
 
 
