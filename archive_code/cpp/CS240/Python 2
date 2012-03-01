@@ -1,0 +1,20 @@
+Python 2
+22 Mar 2010
+
+class App(Tk):
+      def __init__(self):
+      	  Tk.__init__(self)
+	  self.lblOutput = Label(self, 
+
+once you create a function you can refer to it like a variable
+     first class citizen
+
+in python you must implicitly create the main class
+
+python doesnt have private instance variables
+you always have to initialize the parent class
+
+you can use this !!!!!!!!
+    name = property(fget = getFormalName, fset = setName)
+
+

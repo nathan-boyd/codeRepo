@@ -1,0 +1,9 @@
+Step (left or right):
+This button advances you one frame right or left in your animation it also automatically saves your animation to the disk and adds a delimiter to the file.
+
+Import ASCII:
+This button imports a '&' delimited ASCII animation that is already saved to disk.
+
+Animate:
+Animates the currentely loaded animation in a seperate frame.
+

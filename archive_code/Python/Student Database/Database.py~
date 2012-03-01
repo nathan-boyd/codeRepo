@@ -1,0 +1,90 @@
+from Student import*
+from sys import*
+import time
+import csv
+
+class Database():
+    
+    def __init__(self, fileName):
+        self.aStudents = []
+        self.fileName = fileName
+        print "***Importing the file " + fileName
+        self.importFile()
+
+    def importFile(self):
+        with open(self.fileName, 'rb') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                newStudent = Student(row)
+                self.aStudents.append(newStudent)
+
+    def printDatabase(self):
+        print "Print Database"
+        for index in range(len(self.aStudents)):
+            print ""
+            newAddress = self.aStudents[index].getAddress()
+            bDate =  self.aStudents[index].getbDate()
+            cDate = self.aStudents[index].getcDate()
+            print self.aStudents[index].getFirstName() + " " + self.aStudents[index].getLastName()
+            print "Hours: " + self.aStudents[index].getHours() + " GPA: " + self.aStudents[index].getGpa()
+            print "Date of Birth: " + bDate.getDate()
+            print "Date of Grad: " + cDate.getDate()
+            newAddress.printAddress() 
+
+    def Menu(self):
+
+        print "\n";
+        print "ooooooooooo.                 .              .o8                                         " 
+        print "`888'   `Y8b              .o8              888                                          " 
+        print " 888      888  .oooo.   .o888oo  .oooo.    888oooo.    .oooo.    .oooo.o  .ooooo.       " 
+        print " 888      888 `P  )88b    888   `P  )88b   d88' `88b  `P  )88b  d88(   8 d88' `88b      " 
+        print " 888      888  .oP 888    888    .oP 888   888   888   .oP 888  ` Y88b.  888ooo888      "
+        print " 888     d88' d8(  888    888 . d8(  888   888   888  d8(  888  o.  )88b 888    .o      " 
+        print "o888bood8P'   `Y888""8o      888  `Y888888o  `Y8bod8P'   8`Y888   8o 8""888P '8`Y8bod8  " 
+        print "\n"
+        print "                                    in Python "
+        print "                               Robert Nathan Boyd\n\n"
+
+        print "     1) Enter 1 to display the database." 
+        print "     2) Enter 2 to sort the Database by last name and display the results." 
+        print "     3) Enter 3 to sort the Datebase by first name and  display the results."
+        print "     4) Enter 4 to sort the Database by the students by home city and display the results." 
+
+        print "\n     5) Enter 5 to search for a student." 
+
+        print "     0) Enter 0 to quit" 
+
+        print "\n                      Please enter a number from 1-6.\n"
+
+        choice = raw_input("Choice: ")
+        print "You have chosen " + choice
+
+        if choice == "1":
+            print "Displaying Database"
+            self.progress(5)
+
+
+    def progress(self, clicks):
+        for index in range(clicks):
+            time.sleep(.5)
+            print "*"
+
+    def Sort(self, iLeft, iRight, type):
+        i = iLeft
+        j = iRight
+        size = len(self.aStudents)
+        median = self.aStudents[(iLeft + iRight)/2].getAscii()                                      
+        
+        while (i <= j):
+            while i < size and self.aStudents[i].getAscii() < median:
+                i+=1
+            while j < size and self.aStudents[j].getAscii() > median:
+                j-=1
+            if (i < size and j < size and i <= j):
+                self.aStudents[i], self.aStudents[j] = self.aStudents[j], self.aStudents[i]
+                i+=1
+                j-=1
+        if (iLeft < j):
+            self.Sort(iLeft, j, type);
+        if (i < iRight):
+            self.Sort(i, iRight, type);

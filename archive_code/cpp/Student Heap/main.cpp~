@@ -1,0 +1,17 @@
+#include "Address.h"
+#include "Date.h"
+#include "Student.h"
+#include "Database.h"
+#include "Menu.h"
+
+using namespace std;
+
+main(){
+
+  //  Database newDatabase("Student_Info.csv");      //make a new database object called newDatabase
+  //  newDatabase.Menu(newDatabase);
+
+  Menu newMenu = Menu();
+ 
+  
+}//end main

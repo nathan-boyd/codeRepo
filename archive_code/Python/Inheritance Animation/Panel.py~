@@ -1,0 +1,7 @@
+class Panel():
+  def __init__(self, lStrings): 
+    self.listPanel = lStrings
+
+  def getPanel(self):
+    return self.listPanel
+    

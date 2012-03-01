@@ -1,0 +1,45 @@
+#ifndef ADDRESS_H_EXISTS
+#define ADDRESS_H_EXISTS
+
+#include <string>
+
+using namespace std;
+
+class Address{
+
+  private:
+
+    string sAddress1;
+    string sAddress2;
+    string sCity;
+    string sState;
+    string sZip;
+    string sCountry;
+
+  public:
+
+    Address();
+
+    friend ostream& operator<<(ostream& os, Address& c);
+
+    void setAddress1(string lString);
+    string getAddress1();
+
+    void setAddress2(string lString);
+    string getAddress2();  
+  
+    void setCity(string lString);
+    string getCity();   
+ 
+    void setState(string lString);
+    string getState();  
+  
+    void setZip(string lString);
+    string getZip();   
+ 
+    void setCountry(string lString);
+    string getCountry();
+
+};//end class def
+
+#endif

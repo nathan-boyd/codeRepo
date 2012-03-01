@@ -1,0 +1,14 @@
+from Tkinter import *
+import time
+
+class ASCII_Panel(Tk):
+  def __init__(self): #two inits to call the parent class
+    Tk.__init__(self)
+
+
+def main():
+  app = ASCII_Canvas()
+  app.mainloop()
+
+if __name__ == "__main__":
+  main()

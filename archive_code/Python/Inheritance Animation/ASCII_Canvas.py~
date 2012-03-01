@@ -1,0 +1,55 @@
+from Tkinter import *
+import tkFileDialog
+import time
+
+class ASCII_Canvas(Tk):
+  def __init__(self): #two inits to call the parent class
+    Tk.__init__(self)
+
+    self.title("ASCII Canvas")
+    self.configure(bg="white")
+    self.aASCII = [] 
+
+    self.fileName = "ASCII ART/FishTank.ascii"
+    self.ImportFile()
+
+    self.quitButton = Button(self, text="QUIT", fg="red", command=self.quit).grid(row=1,column=0)
+    self.importButton = Button(self, text="Import ASCII", fg="blue", command=lambda: self.Load_ASCII()).grid(row=1,column=1)
+    self.animateButton = Button(self, text="Animate", fg="blue", command=lambda: self.Animate()).grid(row=1,column=2)
+
+    #make buttons to move from frame to frame
+    #make animate frame
+    #make art generation frame
+
+  def Load_ASCII(self):
+    self.fileName = tkFileDialog.askopenfilename()    
+    self.ImportFile()
+
+  def ImportFile(self):    
+
+    with open(self.fileName) as f:
+      for row in f:
+        self.aASCII.append(row.rstrip())
+
+  def Animate(self):
+
+#need to make the animation its own window, or encapsulate this class to that effect and make a new controller window 
+
+    self.textArea = Text(self)
+
+    for index in range(len(self.aASCII)):
+      self.textArea.insert(INSERT, self.aASCII[index])
+      self.textArea.insert(INSERT, "\n")
+
+      if self.aASCII[index].count("&") != 0:
+        self.textArea.grid(row=2,column=1)
+        self.update()
+        time.sleep(.25)
+        self.textArea.delete(1.0,END)
+
+def main():
+  app = ASCII_Canvas()
+  app.mainloop()
+  
+if __name__ == "__main__":
+  main()

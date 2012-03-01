@@ -1,0 +1,84 @@
+;;Blackbelt Challenge accepted! Will multiply negative numbers
+
+;;Robert Boyd 22SEP2010
+;;robboyd@iupui.edu
+
+;;Input the numbers to be multiplied at the bottom in the a: and b: labels
+;;ensure that there is no space after the colon 
+;;input should look like this a:X (x is your Integer)
+
+;;Checks if a is negative if so we jump to Aneg label
+
+		Anegativecheck:	LOD a
+					JMN Aneg
+					JMP Bnegativecheck
+
+;;Checks is b is negative is so we jump to Bneg label
+
+		Bnegativecheck:	LOD b
+					JMN Bneg
+					JMP cycle
+
+;;Multiplication Cycle. Nothing to see here.
+
+		cycle:			LOD product
+					ADD a
+					STO product
+					LOD b
+					DEC
+					STO b
+
+					JMZ negativetimeA
+					JMP cycle
+
+;; Checks to see if the negative number indicator is tripped and if so it
+;; makes the product negative
+
+		negativetimeA:			LOD isAneg
+						JMZ negativetimeB
+						LOD product
+						SUB product
+						SUB product
+						STO product
+
+		negativetimeB:			LOD isBneg
+						JMZ quit
+						LOD product
+						SUB product
+						SUB product
+						STO product
+
+
+		quit: 			LOD product
+					HLT
+		
+
+;;When negative numbers are encountered they are sent here and made positive
+;;Also updates the label is?Neg to display a 1 
+
+Aneg:		LOD a
+		SUB a
+		SUB a
+		STO a
+		LOD isAneg
+		INC	
+		STO isAneg	
+		JMP Bnegativecheck
+
+Bneg:		LOD b
+		SUB b
+		SUB b
+		STO b
+		LOD isBneg
+		INC
+		STO isBneg
+		cycle
+
+;;aNeg and Bneg should be 0 if both numbers are positive ints if not they will be 1
+
+a:5
+b:4
+
+product:0
+isAneg:0
+isBneg:0

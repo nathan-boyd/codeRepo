@@ -1,0 +1,170 @@
+CS 240
+22 FEB 2011
+
+  In cpp every class must have a null parameter constructor
+  The most important operator that people overload is the << prints out a string that represents the class
+
+  all the operators we deal with tend to be communicative.
+
+
+//complex.cpp
+//demonstrates overloading plus operator
+
+#include <iostream>
+using namespace std;
+
+class complex {
+  private:
+    int real, ima;
+  public:
+    complex(int real = 0, int ima = 0);
+    void printValue();
+    //use friend functions for operator overloading
+    friend complex operator+(complex, complex);
+    friend ostream& operator<<(ostream& os, const complex& c);
+}; // end complex def
+
+complex::complex(int real, int ima){
+  complex::real = real;
+  complex::ima = ima;
+} // end constructor
+
+void complex::printValue(){
+  //prints out the content of the real number
+  cout << "real: " << real << ", ima: " << ima << endl;
+} // end printValue
+
+complex operator+(complex a, complex b){
+  //define + in the context of a complex number
+  int realPart = a.real + b.real;
+  int imaPart = a.ima + b.ima;
+  complex result = complex(realPart, imaPart);
+  return result;
+}
+
+ostream& operator<<(ostream& os, const complex& c){ // returns a reference to an output stream and a has COUT is our output stream
+  //define easy way to add this class to an output
+  //stream
+  os << "real: " << c.real << ", ima: " << c.ima << endl;
+} // end stream overload
+
+int main() {
+  complex a(2, 3);
+  complex b(4, 5);
+  complex sum = a + b;
+  a.printValue();
+  b.printValue();
+  sum.printValue();
+
+  cout << endl << endl;
+  cout << a << b << sum;
+
+  return 0;
+} // end main
+  
+
+Static members
+
+Static can be used in front of data members and variables
+
+Total passenger analogy
+
+Refernece that all objects can share / will share
+
+CPP must be global variables
+
+
+
+//staticBus.cpp
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Bus {
+  private:
+    string name;
+    int passengers;
+  public:
+    static int totalPass;
+    Bus();
+    Bus(string name);
+    void board(int numPass);
+    void debark(int numPass);
+    void printPass();
+    static void printTotal();
+}; // end class def
+
+Bus::Bus(){
+  name = "";
+  passengers = 0;
+} // end Bus constructor
+
+Bus::Bus(string name){
+  Bus::name = name;
+  passengers = 0;
+} // end single string constructor
+
+void Bus::board(int numPass){
+  //adds the indicated number of passengers
+  //to the current bus
+  passengers += numPass;
+
+  //add to total passengers
+  totalPass += numPass;
+  printPass();
+} // end board
+
+void Bus::debark(int numPass){
+  passengers -= numPass;
+  if (passengers < 0 ){
+    cout << "You can't have negative passengers!" << endl;
+    //put them back
+    passengers += numPass;
+  } // endIf
+  //no need to modify totalPassengers
+  printPass();
+} // end debark
+
+void Bus::printPass(){
+  //prints bus name, # of passengers
+  cout << name << ": "<< passengers << endl;
+} // end printPass;
+
+void Bus::printTotal(){
+  //prints out the total (static)
+  //number of passengers
+  cout << "Total Passengers: " << totalPass << endl;
+}
+
+//static variables must be declared in global scope!
+//C++ wierdness...
+int Bus::totalPass = 0;
+
+int main(){
+  Bus b1("Magic bus");
+  b1.board(5);
+  b1.board(3);
+  b1.debark(4);
+
+  //printTotal is static: Use class scope modifier
+  Bus::printTotal();
+
+  //toss in some more buses
+  Bus b2("Gus the bus");
+  Bus b3("Lime-O-zine");
+
+  //do a bunch of transactions
+  b2.board(12);
+  b3.board(9);
+  b2.debark(6);
+  b1.board(5);
+  b3.debark(8);
+
+  //total passengers value is shared between buses
+  Bus::printTotal();
+
+  return 0;
+}
+

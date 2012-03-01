@@ -1,0 +1,56 @@
+#include <string>
+#include <iostream>
+#include "Address.h"
+
+using namespace std;
+
+Address::Address(){
+}//end constructor
+
+ostream& operator<<(ostream& os, Address& address){
+  os << "\n" << address.getAddress1() << "\n" << address.getAddress2() << "\n"
+     << address.getCity() << ", " << address.getState() << " " << 
+     address.getZip() << "\n" << address.getCountry() << "\n" << endl;
+}//end overload
+
+void Address::setAddress1(string lString){
+  Address::sAddress1 = lString;
+}//end setter
+string Address::getAddress1(){
+  return(Address::sAddress1);
+}//end getter
+
+void Address::setAddress2(string lString){
+  Address::sAddress2 = lString;
+}//end setter
+string Address::getAddress2(){
+  return(Address::sAddress2);
+}//end getter
+  
+void Address::setCity(string lString){
+  Address::sCity = lString;
+}//end setter
+string Address::getCity(){
+  return(Address::sCity);
+}//end getter
+ 
+void Address::setState(string lString){
+  Address::sState = lString;
+}//end setter
+string Address::getState(){
+  return(Address::sState);
+}//end getter
+  
+void Address::setZip(string lString){
+  Address::sZip = lString;
+}//end setter
+string Address::getZip(){
+  return(Address::sZip);
+}//end getter
+
+void Address::setCountry(string lString){
+  Address::sCountry = lString;
+}//end setter
+string Address::getCountry(){
+  return(Address::sCountry);
+}//end getter

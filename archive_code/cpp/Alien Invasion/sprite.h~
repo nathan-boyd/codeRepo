@@ -1,0 +1,52 @@
+#ifndef SPRITE_H
+#define SPRITE_H
+
+#include <QGraphicsItem>
+#include <QObject>
+
+#include <iostream>
+#include <string>
+
+
+class Sprite : public QObject, public QGraphicsItem   { //Sprite Inherits from QGraphicsItem and QObject
+
+     Q_OBJECT
+
+public:
+  Sprite();
+  
+  QRectF boundingRect() const;
+  QPainterPath shape() const;
+  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //QT required virtual method
+
+  void MoveShip(int);
+  void Shoot();
+
+  QString getType();
+  void setType(QString);
+
+  int getDY();
+  void setDY(int);
+
+  int getDX();
+  void setDX(int);
+
+protected:
+  void advance(int step);
+
+signals:
+  void RandFire();
+  void RemoveThis(QGraphicsItem*);
+
+private:
+  QObject *parent;
+  QString  myName;
+  int dx;
+  int dy;
+
+  QPainterPath Border;
+  QColor color;
+
+};
+
+#endif

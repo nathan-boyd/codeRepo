@@ -1,0 +1,39 @@
+from Tkinter import *
+import csv
+
+class App(Tk):
+  def __init__(self):
+    Tk.__init__(self)
+
+    self.fileName = "ASCII_Trooper.txt"
+    self.aASCII = [] 
+    
+    self.title("ASCII ART Animator")
+    self.text1 = Text( self, width = 100, height = 25 )
+    self.text1.grid( rowspan = 3 , sticky = W+E+N+S )
+    
+    self.importFile()   
+    self.DrawArt()
+
+  def DrawArt(self):
+
+    for index in range(len(self.aASCII)):
+#        self.text1.insert( INSERT,  self.aASCII[index] )
+        print self.aASCII[index]
+  #  for index in range(len(self.aASCII)):
+  #      Label(self, text = self.aASCII[index], font = ("Helvetica", "2", "bold italic")).grid()
+    
+
+  def importFile(self):       
+      with open(self.fileName, 'rb') as f:
+          reader = csv.reader(f)
+          for row in reader:
+              self.aASCII.append(row)
+
+    
+def main():
+  app = App()
+  app.mainloop()
+
+if __name__ == "__main__":
+  main()

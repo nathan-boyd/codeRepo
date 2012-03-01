@@ -1,0 +1,43 @@
+5 April 2011
+CS 240
+
+Algorithims and effeicency
+When there is a small number messy algorithins are altight but when you get to large sizes you get problems
+
+n^2 is a fast growth rate
+n is a linear curve
+nlog n tends to be linear
+ 
+not code that has complexity its the algorithim that has complexity
+
+critical section
+  something central to the execution of the code
+  dont be worried about the paint job if the motor isnt running
+  These are things like game loops that happen 30 times a second
+  its the part that gets repeated the most, think deeply rooted loops
+  
+the complexity of the entire program is dominated by the slowest and
+most time consuming section in the overall algorithim
+
+when you write an algorithim with an array you have linear complexity
+
+when you have a two dimensional array you have n^2 complexity
+
+
+
+
+class Node(object)
+  def __init__(self, date, next):
+    object.__init__(self)
+
+c = Node("charlie", None)
+b = Node("beta", c)
+a = Node("alpha", b)
+
+currentNode = a
+while currentNode != None:
+  print currentNode.date
+  currentNode = currentNode.next
+
+
+#####this is a linked list

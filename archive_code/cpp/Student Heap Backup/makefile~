@@ -1,0 +1,7 @@
+all:
+
+	g++ StudentInfo.cpp -o StudentInfo `pkg-config gtkmm-2.4 --cflags --libs`
+
+	g++ Student.h Address.h Date.h 
+
+	./StudentInfo

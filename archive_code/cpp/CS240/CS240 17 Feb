@@ -1,0 +1,371 @@
+17 Feb 2011
+CS 240
+
+Memory management
+
+Heap
+	seperate piece of memory that isnt necessarially part of the function
+	means you need to clean up your memory allocation
+
+There are more side affects to things being on the heap
+
+Moral of Shallow copy is that when you put stuff on the heap name is a pointer to the value "fred" which is on the heap.
+
+Shallow copy copies the values of all memebers blindly
+	the problem comes when you have pointers to the heap that we probably dont want
+	If you do want them to relate to the same thing then you probably want static data members
+
+////////////////////////////////////////////////////////////shallow copy///////////////////////////////////////////////////////////
+
+//shallowCopy.cpp
+
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+class A{ // standard class w/out copy constructor
+  private:
+    //name is fixed-length, so it can be created on stack
+    char name[20];
+  public:
+    A(){
+      strcpy(name, "Fred");  // have to use strcopy to copy strings of characters in the 'c' language
+    } // end constructor
+
+    ~A(){ // this is the destructor not necessary though because there is nothing on the heap
+      //no special destructor needed; no heap variables
+    } // end destructor
+
+    void setName(char *name){
+      strcpy(A::name, name); // updates the global var A
+    } // end setName
+
+    void greet(){
+      printf("my name is %s. \n", name);
+    } // end greet
+
+}; // end A class def
+
+int main(){
+  //instantiate A
+  A a;
+  a.greet();
+
+  //When you assign to a new variable, you actually make a copy
+  //This calls the (default) copy constructor
+  //which simply copies the values of all member variables
+  //The default copy mechanism is a shallow copy.
+  //It copies all stack member variables, but does not
+  //guarantee copies of heap variables.
+
+  A anotherA = a;                                               // copied over the value of a to a new instance of a
+  anotherA.greet();
+
+  //as long as you're using only the stack, things work as expected
+  //change the name of a...
+
+
+  a.setName("George"); // changing the name to george
+  a.greet(); // my name is george
+
+
+  //...and anotherA keeps its own name
+
+
+  anotherA.greet();  // my name is Fred
+  return 0;
+
+
+} // end main
+
+
+///////////////////////////////////////////////////////////////////////shallow heap/////////////////////////////////////////////////
+
+
+//shallowHeap
+
+//If a class uses heap variables,
+//the default shallow copy may not be sufficient.
+
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+class A{ // standard class w/out copy constructor
+  private:
+    //name is dynamic length, so it must be created on heap
+
+    char *name; // makes it on the heap
+
+  public:
+    A(){
+      //since name is defined on heap, size can be determined
+      //at run-time
+
+      name = new char[20]; // normal implementation but its just on the heap
+
+      strcpy(name, "Fred");
+    } // end constructor
+
+    //no explicit copy constructor built;
+    //still using default shallow copy constructor
+
+    ~A(){ // Heap destructor
+      //we now have a heap variable, so we must explicitly delete it
+      delete[] name;  // remember to delete this 
+    } // end destructor
+
+    void setName(char *name){
+      strcpy(A::name, name);
+    } // end setName
+
+    void greet(){
+      printf("my name is %s. \n", name);
+    } // end greet
+}; // end A class def
+
+int main(){
+  //instantiate A
+  A a;
+  a.greet();
+
+  //shallow copies seem to work fine with heap variables too...
+  A anotherA = a;
+  anotherA.greet();
+
+  //but when we change the name of a...
+  a.setName("George");
+  a.greet();
+  //...the name of anotherA also changes
+  anotherA.greet();
+  return 0;
+} // end main
+
+
+/////////////////////////////////////////////////////////////////////////DEEP copy////////////////////////////////////////////////////////////
+
+//DeepCopy.cpp
+//If a class uses heap variables,
+//the default shallow copy may not be sufficient.
+
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+class A{ // standard class w/out copy constructor
+  private:
+    //name is dynamic length, so it must be created on heap
+    char *name;
+  public:
+    A(){
+      //since name is defined on heap, size can be determined
+      //at run-time
+      name = new char[20];
+      strcpy(name, "Fred");
+    } // end constructor
+
+    A(const A &original){                                // automatically called when you copy an instance of the class A
+      //explicit copy constructor                        // aknowledge that there are heap vars and makes new instances of the heap
+      //pass a reference to the original variable        // name will point ot
+
+      //allocate new heap space for this instance
+      name = new char[20];
+
+      //copy values from the original to the instance on the heap
+      strcpy(name, original.name);
+      //this is considered a 'deep' copy, because it not only copies
+      //stack values, it makes new heap values as needed
+
+    } // end copy constructor
+
+    ~A(){
+      //we now have a heap variable, so we must explicitly delete it
+      delete[] name;
+    } // end destructor
+
+    void setName(char *name){
+      strcpy(A::name, name);
+    } // end setName
+
+    void greet(){
+      printf("my name is %s. \n", name);
+    } // end greet
+}; // end A class def
+
+int main(){
+  //instantiate A
+  A a;
+  a.greet();
+
+  //If A has heap variables, it's possible they haven't been initialized
+  //or have been changed.  The copy constructor accepts as a parameter a
+  //reference to the original class, and it explicitly copies all data
+  //members from the original. This is called a 'deep copy,' and it's used
+  //whenever the class uses pointers or heap-based data members.
+
+  A anotherA = a;
+  anotherA.greet();
+
+  //now because the actual data values have new memory on the heap,
+  //each instance of the class has its own heap space for member data
+  //changing the value of a...
+  a.setName("George");
+  a.greet();
+
+  //...doesn't modify the value of anotherA
+  anotherA.greet();
+
+  return 0;
+} // end main
+
+///////////////////////////////////////////////////////Friends//////////////////////////////////////////////////////////////
+
+basic idea is that Function declared outside of the class that can still have access to private members of the class
+
+idea that didnt make the cut to java. probably dont need it
+
+you can also have friend classes
+
+//friend.cpp
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+void changeName();
+class Critter {
+  //note there is no external way to change the name
+  //this is a horrible design, but stick with me for
+  //the example
+
+  //changeName is NOT a member function
+  //I'm just declaring it should have access to this class
+  friend void changeName();                                                     // if you can find this function use it
+
+  private:									// there are no getters or seters here never fear therea re friends
+    string name;
+  public:
+    Critter();
+    void printName();
+}; // end class def
+
+Critter::Critter(){
+  name = "Anonymous";
+}
+
+void Critter::printName(){
+  cout << "My name is " << name << "." << endl;
+}
+
+//changeName is NOT a member function!
+
+void changeName(){
+
+  //Declare an instance of the class I'm a friend of
+
+  Critter c;
+
+  //because changeName is a friend function, it can access
+  //private instance variables
+
+  c.name = "Inigo Montoya";
+  c.printName();
+}
+
+int main(){
+
+  changeName();
+
+  return 0;
+} // end main
+
+//////////////////////////////////////////////////////////complex numbers///////////////////////////////////////////////////////////////
+
+complex numbers have a real part and an imaginary part
+
+polymoophisim idea that same operator can do different things for different classes
+
+here we are adding complex numbers {2,3} which are numbers that are added together
+
+every time a bell rings a magic fairy dies
+
+the secret is overloaded operators
+
+
+
+
+//complex.cpp
+//demonstrates overloading plus operator
+
+#include <iostream>
+using namespace std;
+
+class complex {
+  private:
+    int real, ima;
+  public:
+    complex(int real = 0, int ima = 0); // makes default value for these parameters if there is no... means you dont need a deafault constructor
+    void printValue();
+    //use friend functions for operator overloading
+
+
+    //code below takes 2 complex numbers and returns a complex number
+
+    friend complex operator+(complex, complex);                                // friend operators must be declared friend functions
+    friend ostream& operator<<(ostream& os, const complex& c);                 // operatot+ means that this is a function that defines how the operator will work in
+                                                                               //      this class
+
+
+}; // end complex def
+
+complex::complex(int real, int ima){
+  complex::real = real;
+  complex::ima = ima;
+} // end constructor
+
+void complex::printValue(){
+  //prints out the content of the real number
+  cout << "real: " << real << ", ima: " << ima << endl;
+} // end printValue
+
+
+
+
+
+
+complex operator+(complex a, complex b){                  //operator overloading 
+  //define + in the context of a complex number
+  int realPart = a.real + b.real;
+  int imaPart = a.ima + b.ima;
+  complex result = complex(realPart, imaPart);
+  return result;
+}
+
+
+
+
+
+ 
+ostream& operator<<(ostream& os, const complex& c){                 // very commonly utilized in cpp programming
+  //define easy way to add this class to an output
+  //stream
+  os << "real: " << c.real << ", ima: " << c.ima << endl;
+} // end stream overload
+
+int main() {
+  complex a(2, 3);
+  complex b(4, 5);
+  complex sum = a + b;               
+  a.printValue();
+  b.printValue();
+  sum.printValue();
+
+  cout << endl << endl;
+  cout << a << b << sum;
+
+  return 0;
+} // end main

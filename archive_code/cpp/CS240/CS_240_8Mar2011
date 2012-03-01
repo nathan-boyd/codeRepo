@@ -1,0 +1,169 @@
+Python
+
+    SPE
+    Komodo
+    
+    to make a list you just add stuff to it
+    inv = ["bone saw", "doily"]
+
+    for item in inv
+      print item
+
+    triple quotes are multi line string """ multi """
+
+    print """ asdf 
+        asdf 
+                   asdf
+          """
+
+    it will print just like that
+
+    strings can last over on eline
+
+    if you just have a string sitting in the editor you python considers it a documentation line
+    documentation is bad ass in pytfrom hon
+
+    you can just type help in the idle
+
+    there is an append function for arrays
+
+    index will find where an element occurs in the array
+
+    you can intsert the element in the array
+
+    you can also just sort it
+
+    you can just type help
+
+    type help then modules
+
+    called a batteris included language
+
+    cPickle allows you to store classes in a stream
+      object serialization
+      save an instance to a class with one command that saves it in a manner we can read back in
+
+    Serializing the object by hand
+    URl lib allows you to access content from the web
+      read the HTML and manipulate
+    
+    Sys is a hidden gem
+      allows you to have access to the underlying operatin system
+   
+    Turtle
+      pd 
+
+    Py game
+
+    Tkinter
+      from tkinter import*
+      lblOutput = Label(app)
+      lblOutput = Label(app)
+      lblOutput.grid()
+      lblOutput["text"]   // find your element called test and give it your new value
+      txtInput = Entry(app)
+      txtInput.grid()
+      btnClickMe = Button(app, text = "click me")
+      btnClickMe.grid()
+      def sayHi():
+          name = txtInput.get()
+          lblOutput["text"] = "Hello %s! " name
+      btnClickMe["command"] = sayHi // dont use () because you dont want result of say 
+                                       Hi you want to add the value of the variable sayHi 
+                                       as my command python treats functions as first class 
+                                       can be both a object and a variable assigned a function 
+                                       directly to the button
+
+
+
+      //you can assign a function as a  variable
+      //java script is the most commmon functional language in the world
+      // dictionary is like a map that takes string indicies
+
+  Tuple
+    stuff = ("bone" , "doily", "1")
+    stuff.append("horse")
+    immutable objects cannot be changed
+    can be reassigned 
+    tuple is lie the array we already know
+    good for things that dont change
+  when mighte we not want a list
+    have alot of memory overhead
+    My name is %s and i am %s years old ("George", 5)
+    if you wanted a list of coordinate pairs you could make a list of tuples 
+    
+    StateCap = {
+      "Indiana": "Indianapolis",
+      "Wisconsion": "Madison",
+    }
+
+    StateCap["Indiana"]
+    // will print Indianapolis
+
+    The word Yellow and its Hex value are maps
+
+    for key, value in enumerate(stateCap):
+
+    print key, value
+
+    class Critter(object):
+        //object is what we are extending you should always extend the class, if in doubt extend object
+        
+        def __init__(self, name = "Anon"):  // extending the class itself its just like this
+            print "I just got instantiated" 
+            
+        // funcitons and methods first perameter willalways be called self
+        // you can refer to it
+ 
+        self.name = name
+        
+        // Null parameter with a default
+        // The hard part is not understanding objects
+    
+        def getName(self):
+            return self.name
+
+        def setName(self, name)
+            self.name = name
+ 
+    c = Critter()
+
+    print c.getName()
+    c.setName("alfred")
+    print c.getName()
+    c.name = "jimmy"
+
+    // Jimmy modified an instance variable there is no private key
+    // you are supposed to use __
+    // self.__name // this is supposed to make it so you cant change the __name
+    // doesnt always work
+    
+    // public and private not a big deal in python
+    // not causing a ton of problems
+   
+    // community is rabbid
+    
+    you can still use old style for loops
+
+    for i in range (count(inv)):
+      print ive[i]
+
+    
+    1/0 will make an exception
+
+    "zero division error"
+
+    try:
+
+       1/0
+
+    except:
+       print "Thant was a mistake"
+   
+    import sys
+      print sys.exc_info()
+
+     will print -v version about the exception
+
+next time exception loops
+hwo do you loop untul you get it right

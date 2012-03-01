@@ -1,0 +1,33 @@
+24 Mar 2011
+
+One more assignment in python 
+
+Moving beyond languages
+Some people say you need a degree in programming
+They are all pretty much the same
+
+X sort lab project
+
+We can only look at two thinga at a time
+Swap involves two copies
+Looping 
+Compairing 
+Swapping / Copying
+
+Insertion Sort
+  Looking at small sections
+  sart with a list of 1 then sort 
+    list of 2 then sort
+      list of 3 then sort
+
+Bubble Srot
+       Bubbles largest element to back
+
+Selection sort 
+  finds the biggest on first pass
+  swaps it with end rinse repeat
+
+Merge Sort
+  all previous were linear sort
+  merge elements into a sorted list
+  

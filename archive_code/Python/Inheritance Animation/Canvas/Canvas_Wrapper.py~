@@ -1,0 +1,25 @@
+from Tkinter import *
+from ASCII_Canvas import *
+import tkFileDialog
+
+class Canvas_Wrapper(Tk):
+  def __init__(self): 
+    Tk.__init__(self)
+
+    self.configure(bg="white")  
+    mainFrame = Frame(self)
+    self.title("Canvas Wrapper")
+
+
+    #need to initialize canvas object
+
+
+    self.quitButton = Button(mainFrame, text="QUIT", fg="red", command=self.quit).grid(row=1,column=0)
+    self.importButton = Button(mainFrame, text="Import ASCII", fg="blue", command=lambda: self.Load_ASCII()).grid(row=1,column=1)
+    self.animateButton = Button(mainFrame, text="Animate", fg="blue", command=lambda: self.Animate()).grid(row=1,column=2)
+    self.drawButton = Button(mainFrame, text="Create ASCII", fg="blue", command=lambda: self.Animate()).grid(row=1,column=2)
+
+    mainFrame.grid()
+    self.Canvas = ASCII_Canvas()
+    
+    

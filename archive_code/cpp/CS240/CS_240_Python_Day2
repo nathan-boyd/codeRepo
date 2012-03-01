@@ -1,0 +1,38 @@
+CS 240 Python Day 2
+
+There is a differnece between input and raw input
+  error causes everyhitng to crash
+  exceptions do too but you can catch the exception
+
+import sys
+
+  try:
+    some things
+
+  except ZeroDivisionError:
+    print sys.exc_info()
+
+  //multipurpose exception, like the ending else
+  except:
+    print some other things
+
+want to have different error catching for different errors
+
+you can put your whole program in a try but thats not polite
+  try to focus the errorhandler on a specific area
+
+keepGoing = True
+while keepGoing:
+
+while keepGoing:
+
+  if x == 5:
+    print "Thats a nice number"
+  elif x > 5:
+    print "I would prefer a 5"
+  else:
+    print "What else could it be"
+
+Python GUI
+  You can write it procedural but shouold use App
+  

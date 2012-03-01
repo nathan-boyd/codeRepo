@@ -1,0 +1,6 @@
+class Date:
+    def __init__(self, info):
+        self.info = info
+        import csv
+        ifile  = open(info)
+        reader = csv.reader(ifile)

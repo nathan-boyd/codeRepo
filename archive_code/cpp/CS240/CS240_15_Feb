@@ -1,0 +1,114 @@
+
+Dynamic Memory Allocation
+
+Memory management
+  with c you have a duty to manage your memory
+  with higher level languages you dont deal with memory. it is take care of
+  Dont have to worry about allocation deleting
+
+Constructor 
+  special methos that makes instances of the objects
+  by default cpp has a empty constructor
+  tradition that is empty
+  Critter( *name) takes an array of characters, a pointer to an array or
+  
+There is a problem with dynamically allocating the size of the array 
+
+"new" operator
+
+when we get to a variable we create a new chunk of memory called the stack
+  called teh stack model 
+  good for primitave data types
+  stack is nice because it has automatice scope
+  downside is taht it lacks flexability and it is diccicult to work throught the layers
+  series of smaller nester memory areas
+  
+The heap
+  belongs to the entire program
+  nice because they are note related to the stack
+  The heap is Dynamic!
+  More flexability
+  
+If you use new keyword you are creating that structure on the heap not the stack
+  create the heap object on the form level
+  
+For student pass the pointer around not the entire object
+
+Convinient to pass around the pointer
+
+Dont put primitatives on the Heap
+
+Things that are on the heap must be destroyed when they are not needed
+  you must do this
+  Java has garbage collection alogrothims that are alright but not qholly effective
+  This is a major criticisim of the Higher level languages
+  
+When you are deleting the heap memory you must be sure to delete the entire array not just the pointer
+  
+Deconstructor 
+  gets called when the class is out of scope, automatically
+  deletes the heap variables
+  
+
+critter tilda critter
+
+Critter::~Critter
+
+//Critter with constructor and destructor
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+class Critter {
+  private:
+    char *name;   // doesnt exist yet just says Im going to create it but does mean that it can only be on the heap not the stack
+  public:
+    Critter();
+    Critter(char *name);
+    ~Critter();
+    void setName(char *name);
+    char* getName();
+}; // end class def
+
+Critter::Critter(){
+  //new operator creates variables on the heap
+  name = new char[50];
+  strcpy(name,"anonymous");  //use the str copy for c strings !!!!!!!! this is important
+}
+
+Critter::Critter(char *name){
+  name = new char[50];
+  strcpy(Critter::name, name);;
+}
+
+Critter::~Critter(){
+  //destructor is called when class is deleted
+  cout << "I confess I breathe my last..." << endl;
+  //name is on heap, so it should be deleted
+  delete[] name;                                      //deleting the array
+}
+
+void Critter::setName(char *name){
+  strcpy(Critter::name, name);
+}
+
+char* Critter::getName(){
+  return name;
+}
+
+int main(){
+  //critter array is built on heap
+  Critter *c = new Critter[3];             //this is important to put the pointer ont he stack not the variable array of critters
+  //delete critter array.                  // you can dynamically allocate the size    
+  delete[] c;                              // calls their destructors and re allocates their space on the heap
+  c = NULL;                                //need to null out the pointers
+}
+
+if you are using the heap you should use the copy method and understand the difference between deep and shallow coppying
+
+malloc and free and simmilar things
+
+look up the constInt file
+  constructor initializer
+  
