@@ -1,6 +1,0 @@
-from ASCII_Canvas import *
-
-if __name__ == "__main__":
-  app = ASCII_Canvas()
-  app.mainloop()
-

@@ -1,8 +1,0 @@
-User may
-	load files of the type *.ascii that are delimited by a '&'
-	create new animation panels
-	save new animations
-	launch the animation in a seperate window
-	edit existing panels
-	add new panels 
-	step through animations
