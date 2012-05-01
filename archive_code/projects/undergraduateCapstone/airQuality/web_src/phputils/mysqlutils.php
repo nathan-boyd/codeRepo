@@ -4,10 +4,10 @@
 
 function mysqlconnection()
 {
-	$host="airqual.db.7906438.hostedresource.com"; 						// Host name
-	$username="airqual"; 												// Mysql username
-	$password="srhoakM4IuB5"; 											// Mysql password
-	$db_name="airqual"; 												// Database name
+	$host=""; 						// Host name
+	$username=""; 												// Mysql username
+	$password=""; 											// Mysql password
+	$db_name=""; 												// Database name
 
 	$connection = mysql_connect($host, $username, $password);
 	
