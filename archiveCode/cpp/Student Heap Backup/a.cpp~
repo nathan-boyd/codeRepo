@@ -1,0 +1,114 @@
+#include "Date.h"
+#include "Student.h"
+#include "Address.h"
+
+#include <iostream>
+#include <cctype>
+#include <cstdlib>
+#include <time.h>
+#include <sys/time.h>
+#include <string>
+#include <limits>
+#include <ios> 
+#include <fstream>
+#include <sstream>
+#include <list>
+
+using namespace std;
+
+class StudentInfo{
+
+  private:
+
+  Student *aStudents;
+
+  public:
+
+  void ImportFile(){
+
+    aStudents = new Student[100];
+    ifstream inFile;                                    //Initialize File Stream
+
+    inFile.open("Student_Info.csv");                    //open File
+
+    if (!inFile) {
+      cerr << "Unable to open file";
+      exit(1);   
+    }//end if
+  
+    int count = 0;
+    while (inFile){                                     //need to change this code somme more, get better understanding.
+
+      string temp;
+      if (!getline( inFile, temp )){                    // get lines from the file, store them in temp
+	break;
+      }//end if
+
+      istringstream ss(temp);                           //open a stringstream called ss with the temp string 
+      while (ss){                                       //while ss is open 
+          
+	string info[12];
+	for (int i = 0; i < 12; i++){
+
+	  string s;
+
+	  if (!getline(ss, s, ',' )){                   // copy each line from string stream until we reach a , then start a new string
+	    break;
+
+	  }//end if
+	  info[i] = s;       
+	}//end for
+
+	Student newStudent(info[0],info[1],info[2],info[3],info[4],info[5],info[6],info[7],info[8],info[9],info[10],info[11]);
+	aStudents[count] = newStudent;
+
+	count++;
+      }//end while 
+    }//end while
+  
+    inFile.close(); 
+    cout << "***Import completed" << endl;
+
+  }//end method
+
+  Student GetStudent(int i){
+    return aStudents[i];
+  }// end method
+
+  void PrintAll(StudentInfo Heap){
+
+    for(int i = 0; i < 100; i+=2){
+
+      Student lStudent = Heap.GetStudent(i);
+      Date bDate = lStudent.GetBirthDate();
+      Date cDate = lStudent.GetCompletion();
+      Address address = lStudent.GetAddress();
+      string street1 = address.GetStreet1();
+      string street2 = address.GetStreet2();
+      string city = address.GetCity();
+      string state = address.GetState();
+      string zip = address.GetZip();
+      string country = address.GetCountry();
+      string birth = bDate.GetDate();
+      string completion = cDate.GetDate();
+
+      cout << lStudent.GetFirstName() << " " << lStudent.GetLastName() << endl;
+      cout << "DOB " << birth << " Graduation " << completion << endl;
+      cout << street1 << "\n" << street2 << "\n" << city << ", " << state << " " << zip << " " << country << "\n" << endl;
+
+    }//end for
+  }//end method
+};//end class
+
+int main(){
+
+  StudentInfo Heap;
+
+  Heap.ImportFile();
+  Heap.PrintAll(Heap);
+
+  return 0;
+}//end method
+
+
+
