@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>CSCI N341</title>
+
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/master.css"/>
+	<link rel="shortcut icon" href="../../graphics/icons/bookMark.ico"/>
+	
+	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="Mad.js"></script>
+
+</head>
+
+
+	<body>
+
+		<div id="navigation">
+
+			<ul>
+				<li class="active"><a href="../../index.html">home</a></li>
+	
+			</ul>
+
+		</div>
+
+		<div id="header">		
+			<h1>Mad Lib</h1>
+		</div>
+
+		<div id="wrapper">
+
+			<div id="content">
+              
+                  <h2>  Enter a value for each text field. When you click the "Create Story" button you will see a fun story. </h2>
+                             
+                          <form id="contentForm">
+                          
+                            <p><input name="strName" id="strName" type="text" placeholder="Enter a name" />
+							</p>
+							 
+							<p><input name="strSound" id="strSound" type="text" placeholder="Enter a sound" />
+                            </p>
+							
+                            <p><input name="strColor" id="strColor"type="text" placeholder="Enter a color" />
+                            </p>
+							
+							<p><input name="strName2" id="strName2" type="text" placeholder="Enter a Friends Name" />
+                            </p>                 	
+							
+                            <p><input name="strLoc" id="strLoc" type="text" placeholder="Enter a location" />
+                            </p>
+							
+							<p>  <input name="intSnacks" id="intSnacks" type="text" placeholder="Number of snacks wanted" />
+                            </p>
+                            
+							<p><input name="strAnimal" id="strAnimal" type="text" placeholder="Enter an animal" />
+                            </p>
+							
+							<p><input name="strEmail" id="strEmail" type="text" placeholder="email@example.com" class="required email" />
+                            </p>
+							
+                            <p><input name="strFood" id="strFood" type="text" placeholder="Enter a food" />
+                            </p>
+							
+							<p><input name="intZip" id="intZip" type="text" placeholder="Zip Code" class="required number" minlength="5"/>
+                            </p>
+							
+							<p><input id="butCreateStory" type="button" value="Create Story"/>
+                            </p>
+													
+							<p><input name="butClearForm" id="butClearForm" type="button" value="Clear Form " />
+                            </p>
+                    
+                            <p><textarea name="textArea" id="textArea" cols="50" rows="8" readonly></textarea>
+                            </p>
+        
+                                                                        
+                  </form>
+                   
+			</div>
+
+		</div>
+ 
+	</body>
+	
+</html>

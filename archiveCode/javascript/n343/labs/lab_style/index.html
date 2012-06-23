@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<!--
+TITLE: 						lab_CSS3support
+AUTHOR: 					Robert Nathan Boyd
+PURPOSE:					Create a web utilizing fun CSS3 features
+ORIGINALLY CREATED ON: 		25 May 2012
+LAST MODIFIED ON: 			27 May 2012
+LAST MODIFIED BY:			Robert Nathan Boyd	
+-->
+
+<head>
+
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Fun with CSS3</title>
+<!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="stylesheet" media="screen" href="../lab_CSS3support/reset.css" type="text/css" />
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href='http://fonts.googleapis.com/css?family=Eater' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$("#slide1-1").click(function() {
+			$("#slide1_images").css("left","0");
+		});
+		$("#slide1-2").click(function() {
+			$("#slide1_images").css("left","-450px");
+		});
+		$("#slide1-3").click(function() {
+			$("#slide1_images").css("left","-900px");
+		});
+		$("#slide1-4").click(function() {
+			$("#slide1_images").css("left","-1350px");
+		});
+	});
+	
+</script>
+
+</head>
+
+<body>
+	<div id="header">
+
+		<!-- getting to know the canvas tag -->
+
+		<canvas id="mycanvas" width="800" height="125"></canvas>
+
+		<script type="text/javascript">
+			var canvas = document.getElementById('mycanvas');
+			var context = canvas.getContext('2d');
+
+			context.font = "bold 36px sans-serif";
+			context.shadowColor = "rgb(190, 190, 190)";
+			context.shadowOffsetX = 10;
+			context.shadowOffsetY = 10;
+			context.shadowBlur = 10;
+			context.fillStyle = "rgb(3, 69, 105)";
+			context.fillText("fun with CSS3", 0, 100);
+		</script>
+
+	</div>
+
+	<div id="nav">
+		<ul>
+			<li class="current_page_item"><a href="#">Home</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">Photos</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Links</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</div>
+
+	<aside>
+
+
+		<article class="circle"></article>
+        
+        <article class="drop1">
+			<h2>Drop Shadow</h2>
+			<p>It sounded an excellent plan, no doubt, and very neatly and
+				simply arranged; the only difficulty was, that she had not the
+				smallest idea how to set about it; and while she was peering about
+				anxiously among the trees, a little sharp bark just over her head
+				made her look up in a great hurry.</p>
+                
+        </article>
+        
+        <article class="drop2">
+			<h2>Drop Shadow</h2>
+			<p>This seemed to Alice a good opportunity for making her escape;
+				so she set off at once, and ran till she was quite tired and out of
+				breath, and till the puppy's bark sounded quite faint in the
+				distance.</p>
+                
+        </article>
+
+	
+		<article class="opaque">
+			<h2>fade</h2>
+			<p>the only difficulty was, that she had not the
+				smallest idea how to set about it; and while she was peering about
+				anxiously among the trees.</p>
+		</article>
+        
+        <article id="border">
+        
+        	<h2>Transitions</h2>
+        
+            <p>'Why,' said the Gryphon, 'you first form into a line along the  sea-shore&mdash;'</p>
+            
+            <p>'Two lines!' cried the Mock Turtle. 'Seals, turtles, salmon, and so on;  then, when you've cleared all the jelly-fish out of the way&mdash;'</p>
+            
+            <p>'THAT generally takes some time,' interrupted the Gryphon.</p>
+            
+            <p>'&mdash;you advance twice&mdash;'</p>
+            
+            <p>'Each with a lobster as a partner!' cried the Gryphon.</p>
+					
+		</article>
+	</aside>
+
+	<section>
+
+		<article class="grad1">
+
+			<h2>Gradient</h2>
+
+			<p>The great question certainly was, what? Alice looked all round
+				her at the flowers and the blades of grass, but she did not see
+				anything that looked like the right thing to eat or drink under the
+				circumstances. There was a large mushroom growing near her, about
+				the same height as herself; and when she had looked under it, and on
+				both sides of it, and behind it, it occurred to her that she might
+				as well look and see what was on the top of it.</p>
+                
+        </article>
+        
+		<article class="grad2">
+
+			<h2>Gradient</h2>
+
+			<p>The great question certainly was, what? Alice looked all round
+				her at the flowers and the blades of grass, but she did not see
+				anything that looked like the right thing to eat or drink under the
+				circumstances. There was a large mushroom growing near her, about
+				the same height as herself; and when she had looked under it, and on
+				both sides of it, and behind it, it occurred to her that she might
+				as well look and see what was on the top of it.</p>
+                
+        </article>
+        
+		<article  class="columns">
+			<h2>Columns!</h2>
+
+			<p>The great question certainly was, what? Alice looked all round
+				her at the flowers and the blades of grass, but she did not see
+				anything that looked like the right thing to eat or drink under the
+				circumstances. There was a large mushroom growing near her, about
+				the same height as herself; and when she had looked under it, and on
+				both sides of it, and behind it, it occurred to her that she might
+				as well look and see what was on the top of it.</p>
+                
+        </article>
+        
+		<article  class="font">
+			<h2>Font</h2>
+
+			<p>Hardly knowing what she did, she picked up a little bit of
+				stick, and held it out to the puppy; whereupon the puppy jumped into
+				the air off all its feet at once, with a yelp of delight, and rushed
+				at the stick, and made believe to worry it; then Alice dodged behind
+				a great thistle, to keep herself from being run over; and the moment
+				she appeared on the other side, the puppy made another rush at the
+				stick, and tumbled head over heels in its hurry to get hold of it;
+				then Alice, thinking it was very like having a game of play with a
+				cart-horse, and expecting every moment to be trampled under its
+				feet, ran round the thistle again; then the puppy began a series of
+				short charges at the stick, running a very little way forwards each
+				time and a long way back, and barking hoarsely all the while, till
+				at last it sat down a good way off, panting, with its tongue hanging
+				out of its mouth, and its great eyes half shut.</p>
+		</article>
+    </section>
+    
+
+
+	<footer>
+		<p>&copy; 2012 awesomeSauce industries</p>
+	</footer>
+
+</body>
+
+
+
+
+</html>
