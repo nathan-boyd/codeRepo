@@ -1,0 +1,23 @@
+﻿Build started 9/16/2012 2:47:27 PM.
+     1>Project "A:\documents\nathan\My Documents\Dropbox\workspace\codeRepo\liveCode\cs450\assignent1Retouched\Array.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         A:\systemSpace\applications\visualStudio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _DEBUG /D WIN32 /D _CONSOLE /D _CRT_NONSTDC_NO_WARNINGS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Debug\Array\I386\\" /Fd"Debug\Array\I386\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Array.cpp driver.cpp
+         Array.cpp
+         driver.cpp
+     1>a:\documents\nathan\my documents\dropbox\workspace\coderepo\livecode\cs450\assignent1retouched\driver.cpp(116): warning C4018: '<' : signed/unsigned mismatch
+     1>a:\documents\nathan\my documents\dropbox\workspace\coderepo\livecode\cs450\assignent1retouched\driver.cpp(129): warning C4018: '<' : signed/unsigned mismatch
+     1>a:\documents\nathan\my documents\dropbox\workspace\coderepo\livecode\cs450\assignent1retouched\driver.cpp(148): warning C4018: '<' : signed/unsigned mismatch
+     1>a:\documents\nathan\my documents\dropbox\workspace\coderepo\livecode\cs450\assignent1retouched\driver.cpp(161): warning C4018: '<' : signed/unsigned mismatch
+     1>a:\documents\nathan\my documents\dropbox\workspace\coderepo\livecode\cs450\assignent1retouched\driver.cpp(193): warning C4101: 'e' : unreferenced local variable
+     1>a:\documents\nathan\my documents\dropbox\workspace\coderepo\livecode\cs450\assignent1retouched\driver.cpp(200): warning C4101: 'e' : unreferenced local variable
+     1>a:\documents\nathan\my documents\dropbox\workspace\coderepo\livecode\cs450\assignent1retouched\driver.cpp(238): warning C4101: 'e' : unreferenced local variable
+         Generating Code...
+       Link:
+         A:\systemSpace\applications\visualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Array.exe" /INCREMENTAL /NOLOGO /LIBPATH:. kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Array.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Array.lib" /MACHINE:X86 Debug\Array\I386\Array.obj
+         Debug\Array\I386\driver.obj
+         Array.vcxproj -> A:\documents\nathan\My Documents\Dropbox\workspace\codeRepo\liveCode\cs450\assignent1Retouched\.\Array.exe
+     1>Done Building Project "A:\documents\nathan\My Documents\Dropbox\workspace\codeRepo\liveCode\cs450\assignent1Retouched\Array.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.22

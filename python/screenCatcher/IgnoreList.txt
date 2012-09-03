@@ -1,0 +1,39 @@
+A:\\documents\\nathan\\Dropbox\\tools\\autohotkeyScripts\\autoNathan.ahk - AutoHotkey v1.1.10.01
+Battery Meter
+BluetoothNotificationAreaIconWindowClass
+ccSvcHst
+Chrome App Launcher
+CrashPlan Tray
+CWNPTransportImpl
+DDE Server Window
+Default IME
+DropboxTrayIcon
+DWM Notification Window
+GDI+ Window
+GDI+ Window
+HiddenFaxWindow
+Jump List
+Microsoft-Windows-CDesktopAppSpaceElement-4BF42B71-EA88-489E-917F-495A116C3596
+MS_WebcheckMonitor
+MSCTFIME UI
+Network Flyout
+NvSvc
+PartRenderingEngines limbo
+Program Manager
+Progress
+python275
+Quick Access
+screenCatcher
+Spotify
+Spybot - Search & Destroy 2
+Spybot - Search & Destroy 2 Tray
+Start menu
+Start8
+SWT_Window_Eclipse
+Task Host Window
+Task Switching, 
+tooltip_view_
+TrueCrypt
+TtkMonitorWindow
+UxdService
+Windows Push Notifications Platform

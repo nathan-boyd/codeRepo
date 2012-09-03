@@ -1,0 +1,181 @@
+/**************************************
+TITLE: Hands on #10 Stringing Jack Bauer Along
+AUTHOR: Robert Nathan Boyd (RNB)
+CREATE DATE: 2011.07.07
+PURPOSE:
+	1, Prompts Jack Bauer to enter a text string (between 10 and 15 characters long) and answer a question asking what day of the week it is
+	2.Using Jack's entered text string and the day of week, produce a password based on the following criteria
+	   a. Monday - password is entered text string converted to all upper case
+	   b. Tuesday - password is entered text string converted to all lower case
+	   c. Wednesday - Text string position of the first instance of the character 's' ( Password produced will be an integer)
+	   d. Thursday - the second character in the string (remember, numbering begins with 0)
+	   e. Friday - returns characters starting from first position and including characters up to position 5
+	   f.  Saturday - returns characters starting at position 0 and going on for a total length of 3 characters
+	   g. Sunday - concatenation of substrings produced on days Friday and Saturday
+LAST MODIFIED ON: 2011.07.07
+LAST MODIFIED BY: Robert Nathan Boyd (RNB)
+MODIFICATION HISTORY:
+
+**************************************/
+
+/**************************************
+TITLE: promptUser
+AUTHOR: Robert Nathan Boyd
+DESCRIPTION:  Prompts Jack Bauer to enter a text string (between 10 and 15 characters long) 
+              Answer a question asking what day of the week it is
+@param NA
+
+@return NA
+**************************************/ 
+function promptUser(){
+    keepGoing = true;
+    while(keepGoing){
+	strSecretString = prompt("Enter a text string to encrypt that is between 10 and 15 characters long");
+	if(strSecretString.length <= 15 && strSecretString.length >= 10){
+		keepOnGoing = true;
+		while(keepOnGoing){
+			strWeekDay = prompt("What day of the week is it?");
+	  	  	strWeekDay = strWeekDay.toUpperCase();    
+			if(strWeekDay == "MONDAY" || strWeekDay == "TUESDAY" || strWeekDay == "WEDNESDAY" || strWeekDay == "THURSDAY" || strWeekDay == "FRIDAY" || strWeekDay == "SATURDAY" 					|| strWeekDay == "SUNDAY"){
+				keepGoing = false;
+				keepOnGoing = false;
+				encryptString(strSecretString, strWeekDay);
+			} else {
+				alert("Please enter a week day. (Monday, Tuesday, etc...)");
+			}//end if else
+		}//end while
+	    keepGoing = false;
+	} else {
+	    alert("Your string was not between 10 and 15 characters long.");
+	}//end if
+    }//while
+}//end method
+
+/**************************************
+TITLE: encryptString
+AUTHOR: Robert Nathan Boyd
+DESCRIPTION:2.Using Jack's entered text string and the day of week, produce a password based on the following criteria
+       	a. Monday - password is entered text string converted to all upper case
+	    b. Tuesday - password is entered text string converted to all lower case
+	    c. Wednesday - Text string position of the first instance of the character 's' ( Password produced will be an integer)
+	    d. Thursday - the second character in the string (remember, numbering begins with 0)
+	    e. Friday - returns characters starting from first position and including characters up to position 5
+	    f.  Saturday - returns characters starting at position 0 and going on for a total length of 3 characters
+	    g. Sunday - concatenation of substrings produced on days Friday and Saturday
+
+@param strSecretString    string that the user wishes to encrypt
+@param strWeekDay         day of the week
+
+@return NA
+**************************************/ 
+
+function encryptString(strSecretString, strWeekDay){
+
+	strCode = "";
+	var intCode = 0;
+	
+	if(strWeekDay == "MONDAY"){
+		strCode = strSecretString.toUpperCase();    
+		alert(strCode);
+		
+	} else if(strWeekDay == "TUESDAY"){
+		strCode = strSecretString.toLowerCase();    
+		alert(strCpde);
+		
+	}  else if(strWeekDay == "WEDNESDAY" ){
+		var intCode = strSecretString.IndexOf('s');    
+		alert(intCode);
+		
+	}  else if(strWeekDay == "THURSDAY"){
+	
+	}  else if(strWeekDay == "FRIDAY"){
+	
+	}  else if(strWeekDay == "SATURDAY"){
+	
+	}  else if(strWeekDay == "SUNDAY"){
+	
+	}//end else if
+    
+}//end method
+
+
+promptUser();
+
+
+
+
+
+/*
+
+function gameIntroduction() {
+ 
+    playGame = prompt("Would you like to play a game? (yes or no)");
+    playGame = playGame.toUpperCase();    
+    
+    if(playGame == "YES"){
+		intUserGuess = 0;
+		intGuesses = 0;
+		intRandNum = secretNumberGen();
+
+		alert("The goal of this game is for you to guess my number. Its simple really. You just enter a number and I will tell you if you are high or low. Try to guess my numbes in just a few guesses.");
+
+		while(intUserGuess != intRandNum){
+			intGuesses++;
+			intUserGuess = prompt("Guess a number between 1 and 100");
+			strVerdict = processGuess(intRandNum, intUserGuess);
+			alert("Your guess was " + strVerdict);
+			if (strVerdict == "correct!"){
+				processReward(intGuesses);
+
+			}//end if
+
+		}//end while
+
+		gameIntroduction();
+
+    }//end if
+
+    checkPlayGame(playGame);
+
+}//end function
+
+
+function checkPlayGame(playGame) {
+    if(playGame == "NO"){
+		alert("Goodbye. Come back another time.");
+    } else {
+		alert("I did not understand your response");
+	gameIntroduction();
+
+    }//end else
+
+}//end function
+
+function secretNumberGen() {
+    intRandNum = Math.ceil(Math.random() * 100);
+    return intRandNum;
+
+}//end function
+
+function processGuess(intRandNum, intUserGuess) {
+    if(intUserGuess < intRandNum){
+		return "low";
+    } else if ( intUserGuess > intRandNum){
+		return "high";
+    } else if (intUserGuess == intRandNum){
+		return "correct!";
+    } else {
+		return "not a number between 1 and 100 guess again";
+
+    }//end else
+
+}//end function
+
+function processReward(intGuesses) {
+    alert("It took you " + intGuesses + " guesses");
+
+}//end function
+
+gameIntroduction();
+
+*/
